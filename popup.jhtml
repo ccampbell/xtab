@@ -1,0 +1,24 @@
+<h1>Tab Destroyer</h1>
+
+<form>
+    <h2>Maximum Tabs:</h2>
+    <select id="max" name="max">
+        {% var hasMatch %}
+        {% var match %}
+        {% for (var key in args.options) %}
+            {% match = max == key; %}
+            {% if (match) %}
+                {% hasMatch = true %}
+            {% end %}
+            <option value="{{ key }}"{% if (match) %} selected{% end %}>{{ options[key] }}</option>
+        {% end %}
+        <option value="other"{% if (!hasMatch) %} selected{% end %}>Other...</option>
+    </select>
+
+    <input type="number" name="max" id="input-max"{% if (!hasMatch) %} style="display: block;" value="{{ max }}"{% end %}>
+
+    <h2>Destroy:</h2>
+    <label><input type="radio" name="algo" value="used"{% if (algo == 'used') %} checked{% end %}>Least recently used</label>
+    <label><input type="radio" name="algo" value="accessed"{% if (algo == 'accessed') %} checked{% end %}>Least accessed</label>
+    <label><input type="radio" name="algo" value="oldest"{% if (algo == 'oldest') %} checked{% end %}>Oldest</label>
+</form>
