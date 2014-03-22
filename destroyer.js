@@ -2,6 +2,7 @@
 var usedOn = {};
 var openedOn = {};
 var accessed = {};
+var activeTabId;
 
 function _debug() {
     // console.log.apply(console, arguments);
@@ -17,6 +18,7 @@ function _getAlgo() {
 
 function _handleTabActivated(data) {
     var tabId = data.tabId;
+    activeTabId = tabId;
     _debug('activated', tabId);
 
     usedOn[tabId] = new Date().getTime();
@@ -45,6 +47,10 @@ function _getLowestIn(data, tabs) {
     var value;
     for (var i = 0; i < tabs.length; i++) {
         tabId = tabs[i].id;
+
+        if (tabId === activeTabId) {
+            continue;
+        }
 
         value = data[tabId] || 0;
 
