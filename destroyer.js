@@ -48,7 +48,13 @@ function _getLowestIn(data, tabs) {
     for (var i = 0; i < tabs.length; i++) {
         tabId = tabs[i].id;
 
+        // never close the currently active tab
         if (tabId === activeTabId) {
+            continue;
+        }
+
+        // if you have never been to this tab then skip it
+        if (!data.hasOwnProperty(tabId)) {
             continue;
         }
 
@@ -69,22 +75,28 @@ function _getLowestIn(data, tabs) {
 
 function _removeLeastAccessed(tabs) {
     var removeTabIndex = _getLowestIn(accessed, tabs);
-    _removeTab(tabs[removeTabIndex].id);
-    tabs.splice(removeTabIndex, 1);
+    if (removeTabIndex >= 0) {
+        _removeTab(tabs[removeTabIndex].id);
+        tabs.splice(removeTabIndex, 1);
+    }
     return tabs;
 }
 
 function _removeOldest(tabs) {
     var removeTabIndex = _getLowestIn(openedOn, tabs);
-    _removeTab(tabs[removeTabIndex].id);
-    tabs.splice(removeTabIndex, 1);
+    if (removeTabIndex >= 0) {
+        _removeTab(tabs[removeTabIndex].id);
+        tabs.splice(removeTabIndex, 1);
+    }
     return tabs;
 }
 
 function _removeLeastRecentlyUsed(tabs) {
     var removeTabIndex = _getLowestIn(usedOn, tabs);
-    _removeTab(tabs[removeTabIndex].id);
-    tabs.splice(removeTabIndex, 1);
+    if (removeTabIndex >= 0) {
+        _removeTab(tabs[removeTabIndex].id);
+        tabs.splice(removeTabIndex, 1);
+    }
     return tabs;
 }
 
@@ -105,7 +117,7 @@ function _removeTabs(tabs) {
                 tabs = _removeLeastRecentlyUsed(tabs);
                 break;
         }
-        length = tabs.length;
+        length -= 1;
     }
 }
 
@@ -128,7 +140,6 @@ function _handleTabAdded(data) {
             _removeTabs(tabs);
         }
 
-        usedOn[tabId] = new Date().getTime();
         openedOn[tabId] = new Date().getTime();
         accessed[tabId] = 1;
     });
