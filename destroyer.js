@@ -141,7 +141,7 @@ function _handleTabAdded(data) {
         }
 
         openedOn[tabId] = new Date().getTime();
-        accessed[tabId] = 1;
+        accessed[tabId] = 0;
     });
 }
 
