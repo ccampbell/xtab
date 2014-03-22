@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Tab Destroyer",
+    "author": "Craig Campbell",
+    "version": "0.1.0",
+    "description": "Limit maximum number of open tabs",
+    "icons": {
+        "16": "destroy19.png",
+        "48": "destroy48.png",
+        "128": "destroy128.png"
+    },
+    "permissions": ["tabs"],
+    "browser_action": {
+        "default_title": "Tab Destroyer",
+        "default_icon": "destroy38.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "persistent": false,
+        "scripts": ["raindrop.min.js", "destroyer.js"]
+    }
+}
