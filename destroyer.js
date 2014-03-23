@@ -36,7 +36,7 @@ function _removeTab(tabId) {
     _debug('_removeTab', tabId);
     if (tabId) {
         chrome.tabs.remove(tabId, function() {});
-        _handleTabRemoved(tabId);
+        // _handleTabRemoved(tabId);
     }
 }
 
