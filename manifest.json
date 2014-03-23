@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Tab Destroyer",
     "author": "Craig Campbell",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Limit maximum number of open tabs",
     "icons": {
         "16": "destroy19.png",
