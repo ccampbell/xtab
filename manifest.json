@@ -16,7 +16,6 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "persistent": false,
         "scripts": ["raindrop.min.js", "destroyer.js"]
     }
 }
