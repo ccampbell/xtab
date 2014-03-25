@@ -3,6 +3,8 @@ var usedOn = {};
 var openedOn = {};
 var accessed = {};
 var activeTabId;
+var timeout;
+var activeInterval = 2500;
 
 function _debug() {
     // console.log.apply(console, arguments);
@@ -16,16 +18,30 @@ function _getAlgo() {
     return localStorage.algo || 'used';
 }
 
+function _markActive(tabId) {
+    _debug('marked active', tabId);
+    usedOn[tabId] = new Date().getTime();
+    accessed[tabId] += 1;
+}
+
 function _handleTabActivated(data) {
     var tabId = data.tabId;
     activeTabId = tabId;
     _debug('activated', tabId);
 
-    usedOn[tabId] = new Date().getTime();
-    accessed[tabId] += 1;
+    clearTimeout(timeout);
+
+    // after 3 seconds mark this tab as active
+    // this is so if you are quickly switching tabs
+    // they are not considered active
+    timeout = setTimeout(function() {
+        _markActive(tabId);
+    }, activeInterval);
 }
 
 function _handleTabRemoved(tabId) {
+    clearTimeout(timeout);
+
     _debug('removed', tabId);
     delete usedOn[tabId];
     delete openedOn[tabId];
