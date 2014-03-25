@@ -157,12 +157,34 @@ function _handleTabAdded(data) {
     });
 }
 
-function _init() {
+function _bindEvents() {
     chrome.tabs.onActivated.addListener(_handleTabActivated);
     chrome.tabs.onCreated.addListener(_handleTabAdded);
     chrome.tabs.onAttached.addListener(_handleTabAdded);
     chrome.tabs.onRemoved.addListener(_handleTabRemoved);
     chrome.tabs.onDetached.addListener(_handleTabRemoved);
+}
+
+function _init() {
+
+    // on startup loop through all existing tabs and set them to active
+    // this is only needed so that if you first install the extension
+    // or bring a bunch of tabs in on startup it will work
+    //
+    // setting the time to their tab id ensures they will be closed in
+    // the order they were opened in and there is no way to figure
+    // out what time a tab was opened from chrome apis
+    chrome.tabs.query({}, function(tabs) {
+        for (var i = 0; i < tabs.length; i++) {
+            if (!usedOn.hasOwnProperty(tabs[i].id)) {
+                openedOn[tabs[i].id] = tabs[i].id;
+                usedOn[tabs[i].id] = tabs[i].id;
+                accessed[tabs[i].id] = 0;
+            }
+        }
+
+        _bindEvents();
+    });
 }
 
 $.ready(_init);
