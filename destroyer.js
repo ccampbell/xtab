@@ -148,7 +148,7 @@ function _handleTabAdded(data) {
             return !tab.pinned && tab.id != tabId;
         });
 
-        if (tabs.length >= parseInt(localStorage.max, 10)) {
+        if (tabs.length >= _getMax()) {
             _removeTabs(tabs);
         }
 
