@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Tab Destroyer",
+    "name": "xTab",
     "author": "Craig Campbell",
     "version": "0.1.5",
     "description": "Limit maximum number of open tabs",
@@ -11,7 +11,7 @@
     },
     "permissions": ["tabs"],
     "browser_action": {
-        "default_title": "Tab Destroyer",
+        "default_title": "xTab",
         "default_icon": "destroy38.png",
         "default_popup": "popup.html"
     },
