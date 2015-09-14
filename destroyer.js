@@ -148,7 +148,18 @@ function _handleTabAdded(data) {
             return !tab.pinned && tab.id != tabId;
         });
 
+        _debug('Total tabs', tabs.length);
+        _debug('Max tabs', _getMax());
+
         if (tabs.length >= _getMax()) {
+
+            // If this is set to block just immediately remove this tab before
+            // even adding info about it
+            if (_getAlgo() === 'block') {
+                _removeTab(tabId);
+                return;
+            }
+
             _removeTabs(tabs);
         }
 
