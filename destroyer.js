@@ -88,7 +88,7 @@ function _getLowestIn(data, tabs) {
         }
 
         // if you have never been to this tab then skip it
-        if (!data.hasOwnProperty(tabId)) {
+        if (!usedOn.hasOwnProperty(tabId) || !data.hasOwnProperty(tabId)) {
             continue;
         }
 
