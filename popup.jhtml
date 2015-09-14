@@ -17,10 +17,10 @@
 
     <input type="number" name="max" id="input-max"{% if (!hasMatch) %} style="display: block;" value="{{ max }}"{% end %}>
 
-    <h2>Destroy:</h2>
+    <h2>Close existing tab:</h2>
     <label><input type="radio" name="algo" value="used"{% if (algo == 'used') %} checked{% end %}>Least recently used</label>
     <label><input type="radio" name="algo" value="accessed"{% if (algo == 'accessed') %} checked{% end %}>Least accessed</label>
     <label><input type="radio" name="algo" value="oldest"{% if (algo == 'oldest') %} checked{% end %}>Oldest</label>
-    <h2>Block:</h2>
+    <h2>Block new tab:</h2>
     <label><input type="radio" name="algo" value="block"{% if (algo == 'block') %} checked{% end %}>Block new tabs from opening</label>
 </form>
