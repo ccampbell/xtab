@@ -48,6 +48,24 @@ function _handleTabRemoved(tabId) {
     delete accessed[tabId];
 }
 
+function _handleTabReplaced(newTabId, oldTabId) {
+    if (usedOn[oldTabId]) {
+        usedOn[newTabId] = usedOn[oldTabId];
+    }
+
+    if (openedOn[oldTabId]) {
+        openedOn[newTabId] = openedOn[oldTabId];
+    }
+
+    if (accessed[oldTabId]) {
+        accessed[newTabId] = accessed[oldTabId];
+    }
+
+    delete usedOn[oldTabId];
+    delete openedOn[oldTabId];
+    delete accessed[oldTabId];
+}
+
 function _removeTab(tabId) {
     _debug('_removeTab', tabId);
     if (tabId) {
@@ -174,6 +192,7 @@ function _bindEvents() {
     chrome.tabs.onAttached.addListener(_handleTabAdded);
     chrome.tabs.onRemoved.addListener(_handleTabRemoved);
     chrome.tabs.onDetached.addListener(_handleTabRemoved);
+    chrome.tabs.onReplaced.addListener(_handleTabReplaced);
 }
 
 function _init() {
