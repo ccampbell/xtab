@@ -10,6 +10,10 @@ Chrome extension for limiting the total number of tabs you can have open at the 
 
 https://chrome.google.com/webstore/detail/xtab/amddgdnlkmohapieeekfknakgdnpbleb
 
+## Enterprise use
+
+For enterprise users who are looking to lock specific settings using a group policy for a large installation please see https://xtab.app for more information.
+
 ### What’s new in version 1.0.0
 
 - Rearchitected to support additional functionality and custom builds.
